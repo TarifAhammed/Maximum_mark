@@ -1,0 +1,111 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+    int roll;
+    int marks;
+
+    Student(string name, int roll, int marks)
+    {
+        this->name = name;
+        this->roll = roll;
+        this->marks = marks;
+    }
+};
+
+class comparator
+{
+public:
+    bool operator()(Student a, Student b)
+    {
+        if (a.marks == b.marks)
+        {
+            if (a.roll > b.roll)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+        else
+        {
+            if (a.marks < b.marks)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+    }
+};
+
+int main()
+{
+    
+    priority_queue<Student, vector<Student>, comparator> pq;
+    int n;
+    cin>>n;
+
+    for (int i = 0; i < n; i++)
+    {
+        string name;
+        cin >> name;
+        int roll, marks;
+        cin >> roll >> marks;
+
+        pq.push(Student(name, roll, marks));
+
+    }
+    
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int val;
+        cin>>val;
+
+        if(val==0)
+        { string name;
+           int roll;
+           int marks;
+            cin>>name;
+            cin>>roll>>marks;
+            pq.push(Student(name, roll, marks));
+            Student pr = pq.top();
+            cout << pr.name << " " << pr.roll << " " << pr.marks << endl;
+
+        }
+        else if(val==1)
+        {
+            if(!pq.empty())
+            {
+            
+            Student pr = pq.top();
+            cout << pr.name << " " << pr.roll << " " << pr.marks << endl;
+        }
+        else
+        cout<<"Empty"<<endl;
+
+        }
+        else if(val==2)
+        {
+           if(!pq.empty())
+        pq.pop();
+        if(pq.empty())
+        {
+            cout<<"Empty"<<endl;
+        }
+        else
+    {
+         Student pr = pq.top();
+            cout << pr.name << " " << pr.roll << " " << pr.marks << endl;
+
+
+    }
+    }
+    }
+    
+}
